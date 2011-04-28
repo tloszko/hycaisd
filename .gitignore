@@ -1,0 +1,10 @@
+hycaisd.log
+.DS_Store
+hycaisd.aux
+hycaisd.synctex*
+*.aux
+*.toc
+*.log
+*.dvi
+*.bat
+*.lpr
