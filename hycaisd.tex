@@ -4,8 +4,9 @@
 \usepackage{a4wide}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
-\usepackage{bbm}             
+\usepackage{bbm}            % sudo apt-get install texlive-fonts-recommended texlive-fonts-extra
 \usepackage{amsthm}
+\usepackage{algorithmic}	% sudo apt-get install texlive-science
 \makeatletter
  \renewcommand\@seccntformat[1]{\csname  the#1\endcsname.\quad}
  
@@ -36,7 +37,12 @@
 %\tableofcontents
 \chapter{Wstęp}
 O matko! Robimy aisd!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% POCZĄTEK: poprawka 2010
+
 \chapter{poprawka 2010}
+
 \section{zadanie 1}
 \subsection{Treść}
 Rozwiąż poniższe równanie:
@@ -67,9 +73,38 @@ Z powyżej rozwiązanej rekurencji widać że: $T(n) \in \Omega (2^n)$,
 \end{equation}
 Wynika z tego, że $n^{log_2 n}$ nie jest ograniczeniem górnym.
 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+\section{zadanie 2}
+\subsection{Treśc}
+Wyznacz z dokładność do $\Theta$ (przy jednorotnym kryterium) poniższego fragmentu algorytmu:
+\begin{algorithmic}
+\STATE $suma \leftarrow 0$
+\FOR {$i \leftarrow 1 \ to \ n \ \do$}
+	\STATE $k \leftarrow 1$
+	\WHILE {$k \leq i$}
+		\STATE read(x)
+		\STATE $suma \leftarrow suma + x \cdot k$
+		\STATE $k \leftarrow k + k$
+	\ENDWHILE
+\ENDFOR
+\end{algorithmic}
+\subsection{Rozwiązanie}
+
+\begin{equation*}
+	\sum\limits_{i=0}^{n} log_2 i = log_2 1 + ... + log_2 n = log_2(1 \cdot ... \cdot n) = log_2(n!)
+\end{equation*}
+Algorytm jest $\Theta(log_2(n!))$
+
+%% KONIEC: poprawka 2010
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{thebibliography}{99}
 \bibitem{Test} test reference
 \end{thebibliography}
 \end{document}
+
+
+
+
