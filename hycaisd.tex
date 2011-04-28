@@ -38,7 +38,37 @@
 O matko! Robimy aisd!
 \chapter{poprawka 2010}
 \section{zadanie 1}
-Treść zadania 1?
+\subsection{Treść}
+Rozwiąż poniższe równanie:
+\begin{equation*}
+T(n) = 
+	\begin{cases}
+		c 					&	\hbox{jeśli n = 1}		\\
+		2 \cdot T(n-1) + 1 	&	\hbox{jeśli $n > 1$}	\\
+	\end{cases}
+\end{equation*}
+Czy funkcja $T(n)$ jest $O(n^{log_2 n})$?
+\subsection{Rozwiązanie}
+Rozwiązanie równania rekurencyjnego:
+\begin{eqnarray*}
+T(n) 	&=& 2 \cdot T(n-1) + 1	\\
+		&=&	2 \cdot ( 2\cdot T(n-2) + 1 ) + 1	\\
+		&=& 2^2 \cdot T(n-2) + 2 + 1	\\
+		&=&	2^3 \cdot T(n-3) + 2^2 + 2 + 1 \\
+		&...&	\\
+		&=&	2^n\cdot T(1) + 2^{n-1} + ... + 2^2 + 2 + 1 \\
+		&=& 2^n \cdot c + 2^n - 1	\\
+\end{eqnarray*}
+Pokażemy że $T(n) \not\in O(n^{log_2 n})$:
+
+Z powyżej rozwiązanej rekurencji widać że: $T(n) \in \Omega (2^n)$, 
+\begin{equation}
+	\exists_{n_0 \in N} \forall_{n > n_0} n^{log_2 n} = \left(2^{log_2 n}\right)^{log_2 n} = 2^{(log_2 n)^2} < 2^n
+\end{equation}
+Wynika z tego, że $n^{log_2 n}$ nie jest ograniczeniem górnym.
+
+
+
 \begin{thebibliography}{99}
 \bibitem{Test} test reference
 \end{thebibliography}
