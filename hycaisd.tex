@@ -117,6 +117,18 @@ Po zamianie założeniam, minimalna liczba czarnych wierzchołków w każdej sci
 h \leqslant 3 \cdot log(n-1)
 \end{equation*}
 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+\section{zadanie 4}
+\subsection{Treść}
+Z ilu drzew może składać sie kopiec dwumianowy (wersja eager) zawierający 49 elementów?
+\subsection{Rozwiązanie}
+Ponieważ jest to kopiec typu eager nie może miec dwóch drzew dwumianowych tego samego stopnia.
+Aby przekonać się z ilu drzew dwumianowych się on składa, zamieńmy liczbę jego elementów na liczbe o binarną.
+\begin{equation}
+49_{10} = 32_{10} + 16_{10} + 1_{10} = 2_{10}^5 + 2_{10}^4 + 2_{10}^0 = 110001_2
+\end{equation} 
+Widźimy, że kopiec ten składa się z trzech drzew: $B_5$ , $B_4$ i $B_1$.
 
 %% KONIEC: poprawka 2010
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
