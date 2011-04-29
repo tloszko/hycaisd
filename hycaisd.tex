@@ -82,7 +82,7 @@ Wyznacz z dokładność do $\Theta$ (przy jednorotnym kryterium) poniższego fra
 \STATE $suma \leftarrow 0$
 \FOR {$i \leftarrow 1 \ to \ n \ \do$}
 	\STATE $k \leftarrow 1$
-	\WHILE {$k \leq i$}
+	\WHILE {$k \leqslant i$}
 		\STATE read(x)
 		\STATE $suma \leftarrow suma + x \cdot k$
 		\STATE $k \leftarrow k + k$
@@ -95,6 +95,28 @@ Wyznacz z dokładność do $\Theta$ (przy jednorotnym kryterium) poniższego fra
 	\sum\limits_{i=0}^{n} log_2 i = log_2 1 + ... + log_2 n = log_2(1 \cdot ... \cdot n) = log_2(n!)
 \end{equation*}
 Algorytm jest $\Theta(log_2(n!))$
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+\section{zadanie 3}
+\subsection{Treść}
+Załóżmy, że w definicji drzewa czerwno-czarnego zmienimy warunek mówiący iż dzieci czerwonego ojca są czarne na warunek:
+
+dzieci czerwonego ojca, którego ojciec też jest czerwony są czarne
+
+Określ jak zmieni się (z dokładnością) do stałego czynnika maksymalna wysokość tak zdefiniowanych drzew?
+
+\subsection{Rozwiązanie}
+
+Przy orginalnym założeniu:
+\begin{equation*}
+h \leqslant 2 \cdot log(n-1)
+\end{equation*}
+Po zamianie założeniam, minimalna liczba czarnych wierzchołków w każdej scieżce od korzenia do liścia, zmieniła się z $\frac{h}{2}$ na $\frac{h}{3}$. Warunek na h przyjmuje teraz postać:
+\begin{equation*}
+h \leqslant 3 \cdot log(n-1)
+\end{equation*}
+
 
 %% KONIEC: poprawka 2010
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
