@@ -162,6 +162,16 @@ kopiec dwumianowy 	&	kolejka priorytetowa	\\	\hline
 sortowanie leksykograficzne ciągów różnej długości & algorytm rozpoznający czy dwa drzewa są izomorficzne	\\	\hline
 \end{tabular}
 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+\section{zadanie 14}
+\subsection{Treść}
+W problemie LCS stosowaliśmy redukcję problemu porównując ostatnie litery X i Y. Czy jakies znaczenie ma fakt, że są to ostatnie litery a nie pierwsze?
+\subsection{Rozwiązanie}
+Nie jest to istotne.
+
+Weźmy sobie ciągi $X$, $Y$ i niech algorytm $LCS(X, Y)$, obliczający długość najdłuższego podciągu, wykorzystując redukcję problemu porównując ostatnie litery ciagów.
+Zaóważmy że algorytm $LCS'(X, Y) = LCS(X^R, Y^R)$ również poprawnie oblicza długośc najdłuższego podciągu ciagów X, Y, ale można powiedzieć że wykorzystuje on redukcję problemu porównując pierwsze litery X, Y.
 
 %% KONIEC: poprawka 2010
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
