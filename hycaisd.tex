@@ -7,36 +7,15 @@
 \usepackage{bbm}            % sudo apt-get install texlive-fonts-recommended texlive-fonts-extra
 \usepackage{amsthm}
 \usepackage{algorithmic}	% sudo apt-get install texlive-science
+\usepackage{listings}             % Include the listings-package
+\usepackage{framed}
+
 \makeatletter
  \renewcommand\@seccntformat[1]{\csname  the#1\endcsname.\quad}
  
-\usepackage{tikz}
-\usepackage{kpfonts}
-\usepackage[explicit]{titlesec}
-\newcommand*\chapterlabel{}
-\titleformat{\chapter}
-  {\gdef\chapterlabel{}
-   \normalfont\sffamily\Huge\bfseries\scshape}
-  {\gdef\chapterlabel{\thechapter\ }}{0pt}
-  {\begin{tikzpicture}[remember picture,overlay]
-    \node[yshift=-3cm] at (current page.north west)
-      {\begin{tikzpicture}[remember picture, overlay]
-        \draw[fill=Gray] (0,0) rectangle
-          (\paperwidth,3cm);
-        \node[anchor=east,xshift=.9\paperwidth,rectangle,
-              rounded corners=20pt,inner sep=11pt,
-              fill=Black]
-              {\color{white}\chapterlabel. #1};
-       \end{tikzpicture}
-      };
-   \end{tikzpicture}
-  }
-\titlespacing*{\chapter}{0pt}{50pt}{-60pt}
  
 \begin{document}
-%\tableofcontents
-\chapter{Wstęp}
-O matko! Robimy aisd!
+\tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% POCZĄTEK: poprawka 2010
@@ -44,7 +23,7 @@ O matko! Robimy aisd!
 \chapter{poprawka 2010}
 
 \section{zadanie 1}
-\subsection{Treść}
+\begin{framed}
 Rozwiąż poniższe równanie:
 \begin{equation*}
 T(n) = 
@@ -54,7 +33,9 @@ T(n) =
 	\end{cases}
 \end{equation*}
 Czy funkcja $T(n)$ jest $O(n^{log_2 n})$?
-\subsection{Rozwiązanie}
+
+\end{framed}
+
 Rozwiązanie równania rekurencyjnego:
 \begin{eqnarray*}
 T(n) 	&=& 2 \cdot T(n-1) + 1	\\
@@ -76,7 +57,7 @@ Wynika z tego, że $n^{log_2 n}$ nie jest ograniczeniem górnym.
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
 \section{zadanie 2}
-\subsection{Treśc}
+\begin{framed}
 Wyznacz z dokładność do $\Theta$ (przy jednorotnym kryterium) poniższego fragmentu algorytmu:
 \begin{algorithmic}
 \STATE $suma \leftarrow 0$
@@ -89,7 +70,7 @@ Wyznacz z dokładność do $\Theta$ (przy jednorotnym kryterium) poniższego fra
 	\ENDWHILE
 \ENDFOR
 \end{algorithmic}
-\subsection{Rozwiązanie}
+\end{framed}
 
 \begin{equation*}
 	\sum\limits_{i=0}^{n} log_2 i = log_2 1 + ... + log_2 n = log_2(1 \cdot ... \cdot n) = log_2(n!)
@@ -99,14 +80,14 @@ Algorytm jest $\Theta(log_2(n!))$
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
 \section{zadanie 3}
-\subsection{Treść}
+\begin{framed}
 Załóżmy, że w definicji drzewa czerwno-czarnego zmienimy warunek mówiący iż dzieci czerwonego ojca są czarne na warunek:
 
 dzieci czerwonego ojca, którego ojciec też jest czerwony są czarne
 
 Określ jak zmieni się (z dokładnością) do stałego czynnika maksymalna wysokość tak zdefiniowanych drzew?
 
-\subsection{Rozwiązanie}
+\end{framed}
 
 Przy orginalnym założeniu:
 \begin{equation*}
@@ -120,9 +101,9 @@ h \leqslant 3 \cdot log(n-1)
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
 \section{zadanie 4}
-\subsection{Treść}
+\begin{framed}
 Z ilu drzew może składać sie kopiec dwumianowy (wersja eager) zawierający 49 elementów?
-\subsection{Rozwiązanie}
+\end{framed}
 Ponieważ jest to kopiec typu eager nie może miec dwóch drzew dwumianowych tego samego stopnia.
 Aby przekonać się z ilu drzew dwumianowych się on składa, zamieńmy liczbę jego elementów na liczbe o binarną.
 \begin{equation}
@@ -133,7 +114,7 @@ Widźimy, że kopiec ten składa się z trzech drzew: $B_5$ , $B_4$ i $B_1$.
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
 \section{zadanie 5}
-\subsection{Treść}
+\begin{framed}
 Dla której z poniżej podanych struktur danych koszt (najgorszego przypadku) wykonania operacji $find(i)$ sprawdzającej czy klucz $i$ jest pamiętany w struktrze jest $O(log n)$, gdzie $n$ jest rozmiarem struktury?
 \begin{description}
 	\item[(a)] drzewo binarnych przeszukiwań,
@@ -143,17 +124,18 @@ Dla której z poniżej podanych struktur danych koszt (najgorszego przypadku) wy
 	\item[(e)] kopiec Fibonacciego
 	\item[(f)] drzewo czerwono-czarne
 \end{description}
-\subsection{Rozwiązanie}
+\end{framed}
 Dla struktur b, f koszt wykonania operacji $find(i)$ jest $O(log n)$.
 Dla pozostałych jest on $O(n)$.
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
 \section{zadanie 6}
-\subsection{Treść}
+\begin{framed}
 Podaj przykłady nietrywialnych zastosowań poniższych algorytmow i struktur danych:
 kopiec, kopiec Fibonacciego, kopiec dwumianowy, sortowanie leksykograficzne ciągów róznej dlugości
-\subsection{Rozwiązanie}
+\end{framed}
+
 \begin{tabular}{l|l}
 					&	Przykład zastosowania	\\	\hline
 kopiec 				&	algorytm sortowanie przez kopcowanie	\\	\hline
@@ -165,9 +147,9 @@ sortowanie leksykograficzne ciągów różnej długości & algorytm rozpoznając
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 
 \section{zadanie 14}
-\subsection{Treść}
+\begin{framed}
 W problemie LCS stosowaliśmy redukcję problemu porównując ostatnie litery X i Y. Czy jakies znaczenie ma fakt, że są to ostatnie litery a nie pierwsze?
-\subsection{Rozwiązanie}
+\end{framed}
 Nie jest to istotne.
 
 Weźmy sobie ciągi $X$, $Y$ i niech algorytm $LCS(X, Y)$, obliczający długość najdłuższego podciągu, wykorzystując redukcję problemu porównując ostatnie litery ciagów.
