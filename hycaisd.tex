@@ -16,11 +16,215 @@
  
 \begin{document}
 \tableofcontents
+\chapter{Zagadnienia}
+[TODO: trzeba podzielić na części egzaminu]
+\begin{itemize}
+
+\item Algorytmy
+\begin{itemize}
+	\item mnożenie po rosyjsku
+	\item szybkie potęgowanie
+	\item szybkie obliczanie liczb Fibonacciego
+	\item algorytmy sortowania: select i insert
+	\item maszyna RAM jako model obliczeń
+	\item notacja asymptotyczna
+\end{itemize}
+
+\item Algorytmy zachłanne
+\begin{itemize}
+	\item problem wydawania reszty
+	\item algorytmy znajdowania minimalnego drzewa rozpinającego
+	\begin{itemize}
+		\item algorytm Prima
+		\item algorytm Kruskala
+		\item algorytm Boruvki
+	\end{itemize}
+	\item szeregowanie zadań
+	\item szeregowanie zadań z deadlineami
+\end{itemize}
+
+\item Metoda Dziel i Zwyciężaj
+\begin{itemize}
+	\item algorytmy sortowania (mergesort, quick sort)
+	\item algorytmy mnożenia długich liczb (Karatsuby)
+\end{itemize}
+
+\item Metoda Dziel i Zwyciężaj (cd)
+\begin{itemize}
+	\item algorytmy mnożenia długich liczb oparte na podziale na wiele części
+	\item jednoczesne znajdowanie maksimum i minimum
+	\item sieć permutacyjna Waksmana-Benesa
+	\item znajdowanie najbliższej pary punktów na płaszczyźnie
+	\item zachłanny algorytm aproksymacyjny dla problemu Set Cover
+\end{itemize}
+
+\item Programowanie dynamiczne
+\begin{itemize}
+	\item obliczanie współczynnika dwumianowego
+	\item stokrotki
+	\item znajdowanie nakrótszych dróg w grafie między wszystkimi parami wierzchołków
+	\item algorytm Floyda Warshalla
+	\item najdłuższy wspólny podciąg
+\end{itemize}
+
+\item Programowanie dynamiczne (cd)
+\begin{itemize}
+	\item optymalna kolejność mnożenia macierzy
+	\item przynależność słowa do języka bezkontekstowego
+	\item drzewa rozpinające drabin
+\end{itemize}
+
+\item Dolne granice (cd)
+\begin{itemize}
+	\item gra z adwersarzem - jednoczesne znajdowanie minimum i maksimum
+	\item kopiec
+	\begin{itemize}
+		\item definicja
+		\item implementacja tablicowa
+		\item realizacja operacji kopcowych
+		\item zastosowania: heapsort, kolejka priorytetowa
+	\end{itemize}
+	
+	\item metody dowodzenia dolnych granic
+	\begin{itemize}
+		\item argumentacja teorio-informatyczna
+		\begin{itemize}
+			\item drzewa decyzjne - sortowanie; dolna granica w najgorszym i średnim przypadku
+			\item liniowe drzewa decyzyjne - problem: niepowtarzalność elementów
+		\end{itemize}
+		\item redukcje 
+		\begin{itemize}
+			\item nieaproksymowalność problemu komiwojażera
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+
+\item Kopiec (cd)
+\begin{itemize}
+	\item kopiec minmax
+	\item Qucksort
+	\item metody wyboru pivota (deterministycza, losowa, mediana z małej próbki)
+	\item analiza oczekiwanego czasu działania przy losowym pivocie
+	\item usprawnienia Quicksorta
+	\begin{itemize}
+		\item trójpodział
+		\item eliminacja rekursji
+		\item quicksort w miejscu
+	\end{itemize}
+\end{itemize}
+
+\item Sortowanie
+\begin{itemize}
+	\item przez zliczanie
+	\item kubełkowe
+	\item leksykograficzne ciągów jednakowej długości
+\end{itemize}
+
+\item Quicksort
+\begin{itemize}
+	\item prostsza metoda analizy oczekiwanego czasu działania Quicksorta przy losowym wyborze pivota
+\end{itemize}
+
+\item Selekcja
+\begin{itemize}
+	\item znajdowanie drugiego co do wielkości elementu
+	\item metoda Hoare'a
+	\item metoda magicznych piątek
+\end{itemize}
+
+\item Słowniki
+\begin{itemize}
+	\item drzewa zrównoważone
+	\begin{itemize}
+		\item drzewa AVL (definicja, realizacja operacji słownikowych)
+		\item drzewa czerwono-czarne (definicja, realizacja operacji słownikowych)
+	\end{itemize}
+	\item selekcja
+	\begin{itemize}
+		\item zrandomizowany algorytm oparty na próbkowaniu
+	\end{itemize}
+	\item sortowanie ciągów niekoniecznie jednakowej długości z zastosowaniem do sprwadzania izomorfizmu drzew
+\end{itemize}
+
+\item Hashowanie
+\begin{itemize}
+	\item przykłady funkcji hashujących
+	\item kolizje
+	\item pamiętanie elementów kolidujących (nawlekanie, adresowanie otwarte)
+	\item struktury samoorganizujące się
+	\begin{itemize}
+		\item idea
+		\item heurystyki dla list samoorganizujących się
+		\item drzewa rozchylane (splay)
+		\item analiza zamortyzowania ciągów operacji splay
+	\end{itemize}
+	\item kopce dwumianowe (wersja leniwa)
+	\begin{itemize}
+		\item analiza zamortyzowana kosztu operacji
+	\end{itemize}
+	\item kopce Fibonacciego
+	\begin{itemize}
+		\item zastosowanie: algorytm Dijkstry
+		\item wpływ kaskadowego odcięcia drzew na koszt operacji
+	\end{itemize}
+	\item B-drzewa
+	\begin{itemize}
+		\item definicja
+		\item liczba operacji i/o jako miara złożoności
+		\item realizacja operacji słownikowych
+	\end{itemize}
+	\item 2-3-drzewa i ich związek z drzewami czerwono czarnymi
+	\item złączalne kolejki priorytetowe
+	\begin{itemize}
+		\item kopce dwumianowe (wersja gorliwa)
+	\end{itemize}
+\end{itemize}
+
+\item Hashowanie (cd)
+\begin{itemize}
+	\item usuwanie kolizji w otwartym adresowaniu
+	\begin{itemize}
+		\item metoda liniowa
+		\item metoda kwadratowa
+		\item podwójne hashowanie
+	\end{itemize}
+	\item oczekiwana liczba prób przy poszukiwaniu elementu
+	\item uniwersalne rodziny funkcji hashujących
+\end{itemize}
+
+\item Słowniki statyczne
+\begin{itemize}
+	\item optymalne drzewa BST
+	\item statyczny słownik Fredman, Komlosa, Szemeredi'ego
+\end{itemize}
+
+\item{Drzewce}
+\begin{itemize}
+	\item definicja
+	\item istnienie
+	\item realizacja operacji słownikowych
+\end{itemize}
+
+
+\item Statyczny słownik Fredman, Komlosa, Szemeredi'ego (cd)
+\begin{itemize}
+	\item idea konstrukcji
+	\item istnienie odpowiednich funkcji hashujących
+	\item znajdowanie takich funkcji
+\end{itemize}
+
+
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% POCZĄTEK: pierwszy termin 2010
+\chapter{I termin 2010}
+\section{zadanie 1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% POCZĄTEK: poprawka 2010
 
-\chapter{poprawka 2010}
+\chapter{II termin 2010}
 
 \section{zadanie 1}
 \begin{framed}
