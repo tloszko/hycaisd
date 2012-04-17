@@ -9,3 +9,7 @@ hycaisd.synctex*
 *.bat
 *.lpr
 *.ps
+*.synctex.gz
+*.gz
+*.swp
+*.synctex*
