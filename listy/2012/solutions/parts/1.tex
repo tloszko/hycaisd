@@ -1,0 +1,85 @@
+\chapter{Lista 1}
+
+\section{}
+\section{}
+\section{}
+\section{}
+\[a_1 = a, \; a_k = 1, \; a_{i+1} = \lfloor \frac{a_i}{2}\rfloor\]
+\[b_a = b, \; b_{i+1} = 2b_i \Rightarrow b_i = 2^ib \] 
+Niech $a = \sum_{i=1}^k 2^{i-1}\bar{a}_i$, $\bar{a}_i \in \{ 0,1\}$, czyli zapis w postaci binarnej. Wtedy
+
+\[a_n = \sum_{i=1}^n 2^{i-1}\bar{a}_{i+(k-n)}\]
+
+Dowód:
+
+\[\sum_{i=1, \; nieparzyste \; a_i}^k b_i = \sum_{i=1}^k\bar{a}_i2^ib = b\sum_{i=1}^k2^i\bar{a}_i = ab\]
+
+Kryterium jednorodne - koszt każdej operacji jest jednostkowy. Zatem ile jedynek w zapisie binarnym liczby $b$, taką mamy złożoność $\Rightarrow O(\lceil(log_2b)\rceil)$ \\
+Kryterium lagarytmiczne - koszt operacji zależy od odługości operandów. Dodawań mamy tyle samo $\Rightarrow O(\lceil log_2b\rceil \cdot \lceil log_2 ab\rceil)$
+
+
+
+\section{}
+
+Niech $f_n = A_kf_{n-k} + A_{k-1}f_{n-k+1} + \ldots A_1f_{n-1}$. Jeżeli $f_n$ zależy od $k$ poprzednich lementów to tworzymy następującą macierz $k\times k$(x-kolumny, y-wiersze, indeksowanie od 0)
+
+\[M_{x,y} = 1, \; dla \;x=y+1\]
+\[M_{x,k} = A_{n- k + x}\]
+Reszta elementów to 0. Przykład dla $k=3$
+\[ 
+ \left[
+ 	\begin{array}{ccc}
+ 	0		&	1		&	0\\
+ 	0		&	0		&	1\\
+ 	A_{n-3}	&	A_{n-2}	&	A_{n-1}
+ 	\end{array}
+ \right]
+\] 
+
+Żeby policzyć $f_n$ tworzymy wektor $F = (f_{n-k} \ldots f_{n-1})$ i obliczamy $M\cdot F^T$.\newline
+
+
+Tworzymy macierz rozmiaru $(k+m) \times (k+m)$, $k$ - ilość poprzednich wyrazów ciągu, $m$ - stopień wielomianu.
+Dzielimy ją na cztery prostokąty. Lewy górny taki jak w poprzedniej części. Prawy górny wypełniamy zerami, oprócz ostatniego wiersza, który wypełniamy współczynnikami wielomianu. Lewy dolny wypełniamy zerami. Żeby wypełnić prawy dolny zastanówmy się najpierw jak uzyskać $(n+1)^i$. Oczywiście z dwumianu newtona. prawy dolny prostokąt będzie miał postać
+
+\[
+ \left[
+ 	\begin{array}{cccc}
+ 	{m \choose m}	&	\ldots				&	\ldots	& 	{m \choose 0}\\
+ 	0 				&	{m-1\choose m-1}	&	\ldots	&	{m-1 \choose 0}\\
+ 	\ldots			& 	\ldots 				& 	\ldots	& 	\ldots\\
+ 	0				&	0					&	\ldots	&	1
+ 	\end{array}
+ \right]
+\]
+
+
+Znowu tworzymy sobie wektor $F = (f_{n-k} \ldots f_{n-1}, n^m, n^{m-1}, \dots, 1)$ i obliczamy $M\cdot F^T$.
+
+\section{}
+
+
+\section{}
+
+Mamy daną listę $L$. Dzielimy ją na podlisty długości $\sqrt(n)$. Tworzymy dodatkową listę $K$ o długości $\sqrt(n)$, zawierającą wskaźniki na pierwsze elementy utworzonych wcześniej podlist. Przy wstawianiu elementu przeglądamy najpierw Listę $K$, a następnie listę $L$ od miejsca, na które wskazywał wskaźnik z $K$. Maksymalnie przejrzymy $2\sqrt(n)$ elementów. Po wstawieniu elementu musimy ouaktualnić listę wskaźników $K$, czego koszt to znowu $\sqrt(n)$
+
+\section{}
+
+Wejście: Skierowany acykliczny graf.\\
+Wyjście: Długość najdłuższej ścieżki.\\
+LengthTo - tablica $|V(G)|$ elementów początkowo równych 0.\\
+TopOrder(G) - posortowane topologicznie wierzchołki.\\
+
+
+\begin{lstlisting}
+    for each vertex V in topOrder(G) do
+        for each edge (V, W) in E(G) do
+            if LengthTo[W] <= LengthTo[V] + weight(G,(V,W)) then
+               LengthTo[W]  = LengthTo[V] + weight(G,(V,W))
+ 
+    return max(LengthTo[V] for V in V(G))
+\end{lstlisting}
+
+Sortowanie topologiczne działa w czasie $O(E+V)$, więc całość działa w czasie $O(E+V+E+V) = O(E+V)$.
+Żeby wypisać drogę musimy tylko zapamiętywać, dla których wierzchołków spełniony był IF.
+
