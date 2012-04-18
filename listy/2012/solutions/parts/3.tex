@@ -45,7 +45,7 @@ T(2) &=  T(1) + c
 \end{split}
 \end{equation*}
 
-Podstawieniami możemy zapisać $T(2n)$ jako:
+\noindent Podstawieniami możemy zapisać $T(2n)$ jako:
 $$ T(2n) = 2c\cdot \sum_{i=1}^n i $$
 co daje nam $O(n^2)$ co w porównaniu do $O(n^3)$ czasu działania algorytmu euklidesa jest szybsze.
 \section{} %2
@@ -54,59 +54,60 @@ co daje nam $O(n^2)$ co w porównaniu do $O(n^3)$ czasu działania algorytmu euk
 \section{} %3
 Średnicą drzewa nazywamy największą odległość między parami wierzchołków. Będziemy rozważali drzewa ukorzenione w wierzchołku $r$. Wprowadźmy pewne oznaczenia: analizujemy wierzchołek $v$, który ma $m$ synów ponumerowanych od $0$ do $m-1$. Niech $T(v)$ oznacza poddrzewo zaczepione w wierzchołku $v$, natomiast $s[v]$ jego rozmiar (liczbę wierzchołków).
 
-Dla każdego wierzchołka będziemy pamiętali dwie liczby: $tak[v]$ - długość najdłuższej ścieżki z $T(v)$, która kończy się w wierzchołku $v$ oraz $nie[v]$ - długość najdłuższej ścieżki z $T(v)$, która nie kończy się w $v$. Średnica drzewa jest równa $max(tak[r], nie[r])$.
 
-Tablice $tak$ i $nie$ wyliczamy za pomocą następującej rekurencji:
+\noindent Dla każdego wierzchołka będziemy pamiętali dwie liczby: $tak[v]$ - długość najdłuższej ścieżki z $T(v)$, która kończy się w wierzchołku $v$ oraz $nie[v]$ - długość najdłuższej ścieżki z $T(v)$, która nie kończy się w $v$. Średnica drzewa jest równa $max(tak[r], nie[r])$.
+
+\noindent Tablice $tak$ i $nie$ wyliczamy za pomocą następującej rekurencji:
 
 $$ tak[v] = max_{0\leq i < m}( 1 + tak[i] ) $$
 $$ nie[v] = max\big( max_{0\leq i < m}( nie[i] ), max_{0\leq i < m}(tak[i]), max_{0\leq i <j<m}( tak[i]+2+tak[j]) \big) $$
 
-Dla wierzchołka $v$ obliczenia zabierają czas $O(m)$ (wyszukanie dwóch największych elementów w tablicy da się zrobić liniowo). Zatem dla całego drzewa czas wynosi $O(n)$.
+\noindent Dla wierzchołka $v$ obliczenia zabierają czas $O(m)$ (wyszukanie dwóch największych elementów w tablicy da się zrobić liniowo). Zatem dla całego drzewa czas wynosi $O(n)$.
 
 \section{} %4
 
-Ukorzeniamy drzewo w pewnym wierzchołku. Nazwijmy ten wierzchołek $u$, a jego dzieci $v_1, v_2, \ldots , v_n$
+Ukorzeniamy drzewo w pewnym wierzchołku. Nazwijmy ten wierzchołek $u$, a jego dzieci $v_1, v_2, \ldots , v_n$. Zauważamy, że ścieżka długości $C$ albo przechodzi przez ten korzeń albo nie przechodzi:
 
-Zauważamy, że ścieżka długości $C$ albo przechodzi przez ten korzeń albo nie przechodzi:
+\begin{enumerate}[a)]
+\item jeśli ścieżka nie przechodzi przez korzeń, to znajduje się z którymś z $n$ niższych poddrzew z wierzchołkami $v_1, v_2, \ldots, v_n$ (innymi słowy dziel i zwyciężaj).
 
-a) jeśli ścieżka nie przechodzi przez korzeń, to znajduje się z którymś z $n$ niższych poddrzew z wierzchołkami $v_1, v_2, \ldots, v_n$ (innymi słowy dziel i zwyciężaj).
-
-b) jeśli ścieżka przechodzi przez korzeń to albo wychodzi bezpośrednio z korzenia i przechodzi przez jakiś wierzchołek $v_i$ i idzie niżej (czyli ścieżka jedno-fałowa) albo łączy ze sobą dwa wierzchołki $v_i$ i $v_j$ i z dwóch stron idzie niżej (nazwijmy taki typ ścieżki dwu-fałowy). Dodatkowo musimy zapewniać, że połączone ścieżki są długości $C$.
-
+\item jeśli ścieżka przechodzi przez korzeń to albo wychodzi bezpośrednio z korzenia i przechodzi przez jakiś wierzchołek $v_i$ i idzie niżej (czyli ścieżka jedno-fałowa) albo łączy ze sobą dwa wierzchołki $v_i$ i $v_j$ i z dwóch stron idzie niżej (nazwijmy taki typ ścieżki dwu-fałowy). Dodatkowo musimy zapewniać, że połączone ścieżki są długości $C$.
+\end{enumerate}
 
 Zaczniemy od końca, czyli od punktu drugiego. Mamy już jakiś korzeń i chcemy policzyć, ile ścieżek przechodzący przez ten korzeń jest długości $C$. Zauważmy, że łatwo obliczyć odległość dowolnego wierzchołka do korzenia (wystarczy DFS). Teraz stwórzmy sobie strukturę, która potrafi nam coś zrobić:
+\begin{itemize}
+\item $ile(d, 1..i) $ - liczba ścieżek dochodzący do korzenia, które:
+\begin{enumerate}[a)]
+\item są długości $d$;
+\item przechodzą przez któryś z wierzchołków $v_1, \ldots, v_i$.
+\end{enumerate}
 
-$ile(d, 1..i) $ liczba ścieżek dochodzący do korzenia, które:
-a) są długości $d$
-b) a także przechodzą przez któryś z wierzchołków $v_1, \ldots, v_i$
+\item $wstaw(d, i+1) $ - dodaje informację do bazy o ścieżek do korzenia długości $d$, która, przechodzi przez wierzchołek $v_{i+1}$.
+\end{itemize}
 
-$wstaw(d, i+1) $ dodaje informację do bazy o ścieżek do korzenia długości $d$, która, przechodzi przez wierzchołek $v_{i+1}$.
+Drzewo łatwo sobie na rysować na kartce. Jeśli popatrzymy na ścieżkę, to jakiś fragment idzie tak jakby z lewej na prawo (lub na odwrót, zależy jak popatrzymy). Nas będzie interesować ten wierzchołek na końcu ścieżki, który jest najbardziej na prawo, oznaczmy go przez $x$. Niech $d(x)$ to odległość do korzenia. Po drodze zauważamy, że ścieżka przechodzi przez wierzchołek $v_j$, a potem idzie jeszcze bardziej w lewo przez jakiś wierzchołek $v_i$, czyli musi być, że $i<j$. Łatwo zauważyć, że wszystkich ścieżek długości $C$, a kończących się na $x$ jest dokładnie tyle ile jest "lewych" ścieżek dochodzących do korzenia, ale długości $C-d(x)$, czyli $ile(C - d(x), 1..j-1)$.
 
-Drzewo łatwo sobie na rysować na kartce. Jeśli popatrzymy na ścieżkę, to jakiś fragment idzie tak jakby z lewej na prawo (lub na odwrót, zależy jak popatrzymy). Nas będzie interesować ten wierzchołek na końcu ścieżki, który jest najbardziej na prawo, oznaczmy go przez $x$. Niech $d(x)$ to odległość do korzenia. Po drodze zauważamy, że ścieżka przechodzi przez wierzchołek $v_j$, a potem idzie jeszcze bardziej w lewo przez jakiś wierzchołek $v_i$, czyli musi być, że $i<j$. Łatwo zauważyć, że wszystkich ścieżek długości $C$, a kończących się na $x$ jest dokładnie
-tyle ile jest "lewych" ścieżek dochodzących do korzenia, ale długości $C-d(x)$, czyli
-$ile(C - d(x), 1..j-1)$.
 
-Można się domyślić, że algorytm będzie wyglądał tak:
+\noindent Można się domyślić, że algorytm będzie wyglądał tak:
 
-1. początkowo $ile(d, 1..0) = 0$, bo wiemy, że nic nie wiemy, za wyjątkiem $ile(0, 1..0) = 1$, bo jest jedna ścieżka długości $0$.
+\begin{enumerate}[1.]
+\item początkowo $ile(d, 1..0) = 0$, bo wiemy, że nic nie wiemy, za wyjątkiem $ile(0, 1..0) = 1$, bo jest jedna ścieżka długości $0$.
+\item Dla kolejnych $i = 1, 2, \ldots, n$, wykonujemy poniższe czynności:
+\begin{enumerate}[a)]
+\item obliczamy odległości do korzenia wierzchołków w poddrzewie $v_i$
+\item do wyniku dodajemy $ile(C - d(x), 1..(i-1))$ ($x$ - wierzchołek w poddrzewie)
+\item uaktualnimy $ile$ poprzez wywołanie $wstaw(d(x), i+1)$ dla wszystkich $x$ w poddrzewie $v_i$
+\end{enumerate}
+\end{enumerate}
+Łatwo zauważyć, że parametr $i$ jest niepotrzebny. Całą strukturę łatwo można stworzyć na jakimś drzewie zrównoważonym (czyli mapie). Wykonujemy dokładnie $O(m)$ zapytań, które kosztują nas $O(\log m)$, bo w mapie może być co najwyżej $m$ różnych liczb, bo jest co najwyżej $m$ ścieżek do korzenia, zatem złożoność wynosi $O(m \log m)$.
 
-2. Dla kolejnych $i = 1, 2, \ldots, n$, wykonujemy poniższe czynności:
 
-a) obliczamy odległości do korzenia wierzchołków w poddrzewie $v_i$
-
-b) do wyniku dodajemy $ile(C - d(x), 1..(i-1))$ ($x$ - wierzchołek w poddrzewie)
-
-c) uaktualnimy $ile$ poprzez wywołanie $wstaw(d(x), i+1)$ dla wszystkich $x$ w poddrzewie $v_i$
-
-Łatwo zauważyć, że parametr $i$ jest niepotrzebny. Całą strukturę łatwo można stworzyć na jakimś drzewie zrównoważonym (czyli mapie). Wykonujemy dokładnie $O(m)$ zapytań, które kosztują nas $O(log m)$, bo w mapie może być co najwyżej $m$ różnych liczb, bo jest co najwyżej $m$ ścieżek do korzenia, zatem złożoność wynosi $O(m log m)$.
-
-Teraz powróćmy do punktu pierwszego, cały algorytm będzie wyglądał tak:
-
-1. Znajdź jakiś fajny wierzchołek, który dzieli graf na "połowę". (zrobimy to w czasie $O(m)$)
-
-2. Policz ile jest ścieżek przechodzących przez korzeń o długości $C$ (opisane wyżej). (Czas $O(m log m)$)
-
-3. Wykonaj rekurencyjnie to samo, ale na poddrzewach.
+\noindent Teraz powróćmy do punktu pierwszego, cały algorytm będzie wyglądał tak:
+\begin{enumerate}[1.]
+\item Znajdź jakiś fajny wierzchołek, który dzieli graf na "połowę". (zrobimy to w czasie $O(m)$)
+\item Policz ile jest ścieżek przechodzących przez korzeń o długości $C$ (opisane wyżej). (Czas $O(m \log m)$)
+\item Wykonaj rekurencyjnie to samo, ale na poddrzewach.
+\end{enumerate}
 
 
 Teraz jak znaleźć fajny wierzchołek. Okazuje się, że istnieje taki wierzchołek, że jeśli go ukorzenimy, to każde poddrzewo jest wielkości co najwyżej $\lceil n/2 \rceil$. A jak go znaleźć: bierzemy wierzchołek $v$, jeśli nie spełnia założeń, to wchodzimy do największego poddrzewa (dowód poprawności jest podobny, nie wprost, pokazujemy, że można zejść niżej).
