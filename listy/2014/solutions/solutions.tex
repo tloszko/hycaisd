@@ -208,8 +208,24 @@ Mówimy, że droga z $u = u_1,u_2, \dots,u_{k−1},u_k = v$ z $u$ do $v$ jest se
 (przez długość drogi rozumiemy sumę wag jej krawędzi).
 Ułóż algorytm, który dla danego $G$ oraz wierzchołków $u$ i $v$ wyznaczy liczbę sensownych dróg z $u$ do $v$.
 }}\\
-Djikstra i lecimy wyniki na lewo. TBC
 
+Wywołujemy algorytm \textbf{Dijkstry} dla wierzchołka $v$. Algorytm działa w czasie $O(|E| + |V| log |V|)$.
+Otrzymujemy tym samym informację o długości najkrótszych dróg prowadzących z każdego wierzchołka grafu do wierzchołka $v$. Niech $S: V \to R_+$ będzie funkcją zwracającą najkrótszą drogę z wierzchołka $V$ do $v$. Wtedy:
+Niech $T$ będzie listą wierzchołków grafu, posortowaną niemalejąco według długości najkrótszej drogi $S$. Niech $x$ w tej tablicy będą początkowo $0$ i oznaczają liczbę sensownych dróg.
+
+$T = [ (d_1, S(d_1), x_1), (d_2, S(d_2), x_2),\dots, (d_{n-1}, S(d_{n-1}), x_{n-1})]$
+
+Teraz, przechodząc listę $T$ od lewej strony do prawej:
+\begin{itemize}
+\item jeżeli nasz $x_i$ jest incydentalny z wierzchołkiem $v$, to dodajemy do $x_i$ jedynkę. Oznacza ona sensowną drogę, będącą najkrótszą drogą prowadzącą z $d_i$ do $v$.
+\item do naszego $x_i$ dodajemy $x_j$ wszystkich wierzchołków leżących na lewo ($j < i$), z którymi nasz wierzchołek jest incydentalny. 
+
+Drogi takie oznaczają wszystkie drogi spełniające warunek: dla każdego $i = 2, \dots , k$ droga z $u_i$ do $v$ jest krótsza od każdej drogi z $u_{i−1}$ do $v$ (czyli w szczególności od drogi najkrótszej).
+
+\end{itemize}
+Po przejściu w ten sposób całej tablicy, znamy ilość sensownych dróg z każdego wierzchołka do wierzchołka $v$.
+
+Djikstra kosztuje $O(|E| + |V| log |V|)$, sortowanie listy $O(|V| log |V|)$, listę przeglądamy liniowo względem długości $O(|V|)$, dodawań $x'ów$ mamy, co najwyżej, $O(|E|)$. Razem $O(|E| + |V| log |V|)$.
 
 
 \section{}%5
