@@ -228,6 +228,7 @@ Po przejściu w ten sposób całej tablicy, znamy ilość sensownych dróg z ka�
 Djikstra kosztuje $O(|E| + |V| log |V|)$, sortowanie listy $O(|V| log |V|)$, listę przeglądamy liniowo względem długości $O(|V|)$, dodawań $x'ów$ mamy, co najwyżej, $O(|E|)$. Razem $O(|E| + |V| log |V|)$.
 
 
+
 \section{}%5
 \fbox{\parbox[t]{\textwidth}{
 Ułóż algorytm, który dla zadanego acyklicznego grafu skierowanego $G$ znajduje długość najdłuższej drogi w $G$. Następnie zmodyfikuj algorytm tak, by wypisywał drogę o największej długości (jeśli jest kilka takich dróg, to Twój algorytm powinien wypisać dowolną z nich).
@@ -239,18 +240,22 @@ TopOrder(G) - posortowane topologicznie wierzchołki grafu $G$.\\
 
 
 \begin{lstlisting}
-    for each vertex V in topOrder(G) do
-        for each edge (V, W) in E(G) do
-            if LengthTo[W] <= LengthTo[V] + weight(G,(V,W)) then
-               LengthTo[W]  = LengthTo[V] + weight(G,(V,W))
+    for each v in topOrder(G) do |v|
+        for each edge (v, w) in E(G) do |w|
+            if LengthTo[w] <= LengthTo[v] + weight(v, w) then
+               LengthTo[w]  = LengthTo[v] + weight(v, w)
  
-    return max(LengthTo[V] for V in V(G))
+    return max(LengthTo[v] for v in V(G))
 \end{lstlisting}
+
+Przechodzimy topologicznie wierzchołki grafu, dzięki temu, przechodząc listę wierzchołków wiemy, że rozpatrzyliśmy już wszystkie wierzchołki które prowadzą do aktualnie przeglądanego wierzchołka. Czyli, dla wierzchołka $v$ rozpatrzyliśmy wszystkie drogi do niego prowadzące, i znamy najdłuższą.
+
+Dla każdego wierzchołka na liście sprawdzamy, czy wierzchołek do którego możemy z niego dojść posiada dłuższą drogę. W ten sposób zachłannie wybieramy zawsze najdłuższą drogę jaką można dojść do każdego wierzchołka, a ponieważ robimy to w porządku topologicznym 
 
 Sortowanie topologiczne działa w czasie $O(E+V)$,
 więc całość działa w czasie $O(E+V+E+V) = O(E+V)$.
 
-Żeby wypisać drogę musimy tylko zapamiętać, dla których wierzchołków spełniony był warunek:
+Aby wypisać drogę musimy tylko zapamiętać, dla których wierzchołków spełniony był warunek:
 
 Prev - tablica początkowo równa $nil$.\\
 
@@ -272,7 +277,8 @@ def longest_path G
 	until x.nil?
 \end{lstlisting}
 
-
+\subsection{szkic dowodu poprawności kryterium optymalizacyjnego}
+Załóżmy że w $i$tym kroku nasz algorytm wylicza nieoptymalną długość drogi do wierzchołka $a$. Ma to znaczenie tylko w momencie, kiedy rozpatrujemy krawędzie wychodzące z $a$. Ponieważ, rozpatrzyliśmy do tego momentu wszystkie wierzchołki grafu prowadzące do $a$, sprawdziliśmy długość wszystkich możliwych dróg prowadzących do $a$ i zachłannie wybraliśmy największą. 
 
 \section{}%6
 
