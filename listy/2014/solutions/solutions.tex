@@ -62,9 +62,106 @@ def diameter(node)
 \fbox{\parbox[t]{\textwidth}{Dla kopca minimaksowego. Przyjmij, że elementy pamiętane są w jednej tablicy (określ w jakiej kolejności). Napisz w pseudokodzie procedury: }}
 \begin{itemize}
 \item{przywracania porządku}
-\item{usuwania minimum}
-\item{usuwania maksimum}
+\begin{verbatim}
+def level(i)
+  floor(log2(i))
 
+def min_level?(i)
+  level(i)\%2 == 1
+
+def trickle_down(K,i)
+  if min_level?(i)
+    trickle_down_min(K,i)
+  else
+    trickle_down_max(K,i)
+  end
+
+def trickle_down_min(K,i)
+  return if K[k] has no children
+  m = index of smallest of the children\
+      and grandchildren (if any) of K[i]
+  
+  if K[m] is a child of K[i]
+    if K[m] < K[i]
+      swap(A[m], A[i])
+  else # it grandchild from next min level
+    if K[m] < K[i]
+      swap(K[m],K[i])
+      if K[m] < K[parent(m)]
+        swap(K[m],K[parent(m)])
+      trickle_down_min(K,m) //swap with parent doesn't change our min/max level
+\end{verbatim}
+
+W \textbf{trickle\_down} sprawdzamy czy element przesuwany w dół należy zamienić z którymś z dzieci oraz wnuków. Dodatkowo, element podmieniamy z wnukiem, sprawdzamy czy nie popsuliśmy ojca wnuka.
+
+Jeśli podmieniliśmy element z bezpośrednim dzieckiem, to znaczy, że porządek jest zachowany i nie musimy schodzić niżej.
+
+\begin{verbatim}
+def bubble_up(K,i)
+  if min_level?(i)
+    if K[i] has a parent and
+      K[i] > K[parent(i)]
+      swap(K[i], K[parent(i)])
+      bubble_up_max(K,parent(i))
+    else
+      bubble_up_min(K,i)
+  else #max level
+    if K[i] has a parent and
+      K[i] < K[parent(i)]
+      swap(K[i],K[parent(i)])
+      bubble_up_min(K,parent(i))
+    else
+      bubble_up_max(K,i)
+
+def bubble_up_min(K,i)
+  if K[i] has a grandparent
+    if K[i] < K[grandparent(i)]
+      swap(K[i],K[grandparent(i)])
+      bubble_up_min(K,grandparent(i))
+\end{verbatim}
+W \textbf{bubble\_up} sprawdzamy najpierw czy świeżo wstawiony element pasuje bardziej do poziomu, na który trafił przy wstawieniu, czy do poziomu wyżej (sprawdzamy czy jest pretendentem do maksimum czy minimum). Następnie przesuwamy go wyżej skacząc bo dziadkach, nie zaburzając przy tym porządku kopca.
+
+
+\begin{verbatim}
+def change(K,i,v)
+  if min_level?(i)
+    if K[i] < v
+      K[i] = v
+      trickle_down(K,i)
+    else
+      K[i] = v
+      bubble_up(K,i)   
+  else
+    if K[i] > v
+      K[i] = v
+      trickle_down(K,i)
+    else
+      K[i] = v
+      bubble_up(K,i)
+\end{verbatim}
+
+Jeżeli element pasuje lepiej na swoim poziomie niż poprzednik, to próbujemy upchnąć go wyżej (relacja z poniższymi elementami jest niezmieniona). Jeżeli element nie pasuje na swoim poziomie, musimy upchać go w dół.
+
+\item{usuwania minimum}
+\begin{verbatim}
+def delete_min(K)
+  min = K[1]
+  swap(K[1],K[n])
+  K = K[1..n-1]
+  trickle_down(K,1)
+  return min
+ \end{verbatim}
+\item{usuwania maksimum}
+\begin{verbatim}
+def delete_max(K)
+  m = index of largest element 
+      amongst K[1], K[2], K[3]
+  max = K[m]
+  swap(K[1], K[n])
+  K = K[1..n-1]
+  trickle_down(K,1)
+  return max
+\end{verbatim}
 \end{itemize}
 \section{}%3
 \fbox{\parbox[t]{\textwidth}{
