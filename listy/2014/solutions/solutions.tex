@@ -183,7 +183,24 @@ jeżeli graf ma wierzchołki to
     wypisz komunikat o błędzie (graf zawiera cykl)
 \end{verbatim}    
 
-Złożoność wynosi $O(|E| + |V| log |V|)$.
+Jedyną zmianą w algorytmie sortowania topologicznego, jest podmienienie kolejki na kolejkę priorytetową. W ten sposób zawsze otrzymujemy wierzchołek spełniający warunek porządku topologicznego, który ma najmniejszy możliwy indeks.
+Złożoność sortowania topologicznego wynosi $O(|E| + |V|)$. Ale w naszym przypadku, każde wstawienie elementu do kolejki trwa $O(log |V|)$ zamaist $O(1)$, zatem złożoność wynosi: $O(|E| + |V| log |V|)$.
+
+\subsection{dowód poprawności}
+Nasz algorytm jest zachłanny, stopniowo buduje rozwiązanie używając lokalnego kryterium optymalności.
+
+Założmy, że nasz algorytm wybrał porządek topologiczny $T = t_1,t_2, \dots, t_n$, podczas gdy istnieje porządek topologiczny optymalny leksykograficznie $L = l_1, l_2, \dots, l_n$, taki że $T \not = L$. Rozważmy pierwszą, najbardziej znaczącą dla porządku leksykograficznego, pozycję $i$ na której rozwiązania się różnią. Zauważmy, że:
+
+Wszystkie elementy $l_1, \dots, l_{i-1}$ muszą:
+\begin{itemize}
+\item zawierać wszystkie wierzchołki będące początkami krawędzi do $l_i$;
+\item wszystkie wierzchołki nie posiadające z $l_i$ żadnej krawędzi, ale będące optymalnym wyborem względem kryterium leksykograficznego;
+\item po usunięciu z grafu $G$ wszystkich krawędzi wychodzących z wierzchołków $l_1,l_2, \dots, l_{i-1}$, stopień wchodzący wierzchołka $l_i$ wynosi $0$
+\end{itemize}
+
+Zatem $l_1,l_2, \dots, l_{i-1} = t_1, t_2, \dots, t_{i-1}$, oraz $t_i > l_i$. 
+Oznacza to, że w naszym rozwiązaniu $T$, po usunięciu wszystkich krawędzi prowadzących z wierzchołków $t_1,t_2, \dots, t_{i-1}$, istniał wierzchołek o stopniu wchodzącym $0$, którego indeks był mniejszy niż $t_i$. A to daje nam sprzeczność, ponieważ na tym etapie wybieramy do rozwiązania wierzchołek o najmniejszym indeksie.
+
 \section{}%4
 \fbox{\parbox[t]{\textwidth}{
 Niech $u$ i $v$ będą dwoma wierzchołkami w grafie nieskierowanym $G = (V,E,c)$, gdzie $c: E \to R_{+}$ jest funkcją wagową. 
