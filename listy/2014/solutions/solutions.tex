@@ -229,10 +229,13 @@ Djikstra kosztuje $O(|E| + |V| log |V|)$, sortowanie listy $O(|V| log |V|)$, lis
 
 
 \section{}%5
-Wejście: Skierowany acykliczny graf.\\
+\fbox{\parbox[t]{\textwidth}{
+Ułóż algorytm, który dla zadanego acyklicznego grafu skierowanego $G$ znajduje długość najdłuższej drogi w $G$. Następnie zmodyfikuj algorytm tak, by wypisywał drogę o największej długości (jeśli jest kilka takich dróg, to Twój algorytm powinien wypisać dowolną z nich).
+}}
 \\
-LengthTo - tablica $|V(G)|$ elementów początkowo równych 0\\
-TopOrder(G) - posortowane topologicznie wierzchołki.\\
+\\
+LengthTo - tablica $|V(G)|$ elementów początkowo równych $0$.\\
+TopOrder(G) - posortowane topologicznie wierzchołki grafu $G$.\\
 
 
 \begin{lstlisting}
@@ -246,35 +249,31 @@ TopOrder(G) - posortowane topologicznie wierzchołki.\\
 
 Sortowanie topologiczne działa w czasie $O(E+V)$,
 więc całość działa w czasie $O(E+V+E+V) = O(E+V)$.
-a żeby wypisać drogę musimy tylko zapamiętać, dla których wierzchołków spełniony był IF.
+
+Żeby wypisać drogę musimy tylko zapamiętać, dla których wierzchołków spełniony był warunek:
+
+Prev - tablica początkowo równa $nil$.\\
+
+\begin{lstlisting}
+def lognest G
+    for each vertex V in topOrder(G) do
+        for each edge (V, W) in E(G) do
+            if LengthTo[W] <= LengthTo[V] + weight(G,(V,W)) then
+               LengthTo[W]  = LengthTo[V] + weight(G,(V,W))
+               Prev[W] = V
+ 
+    return max(LengthTo[V] for V in V(G))
+    
+def longest_path G
+	x = longest(G)
+	do
+		print x
+		x = Prev[x]
+	until x.nil?
+\end{lstlisting}
+
+
 
 \section{}%6
-\section{Druga wersja zadania 1.5.}%7
-
- w wersji O(n+m)
-Q - kolejka wierzchołków o indeg = 0
-P - kolejka wierzchołków posortowanych topologicznie
-T - wyzerowana tablica o dlugosci |V|
-\begin{lstlisting}
-while !Q.empty:
-v = Q.pop();
-   P.;push_back(v);
-      foreach e=(v,u) in G:
-            delete(e);
-                  if(in_deg(u) == 0):
-                            Q.push(u);
-                            
-                            foreach v in P:
-                               foreach (v,u) in G:
-                                     if T[u] < T[v] + w(v,u):
-                                                T[u] = T[v] + w(v,u);
-                                                
-                                                return max(T[v] for v in G)
-\end{lstlisting}
-żeby była rekonstrukcja ścieżki to tak:
-wierzchołek końcowy będziemy mieli po wyznaczeniu z tego maxa
-więc potrzebna nam tylko tabela poprzedników PREV[v] dla v w G
-i tą tablicę wystarczy wypełniać przy podstawianiu nowej wartości pod T[u]
-
 
 \end{document}
