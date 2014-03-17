@@ -48,7 +48,7 @@ Zauważmy, że:
 \end{itemize}
 \begin{lstlisting}
 def diameter(node) 
-	return (0,0) if node.nil? 
+	return (-1,0) if node.nil? 
 	(lheight, ldiameter) = diameter(node.left)
 	(rheight, rdiameter) = diameter(node.right)
 	
