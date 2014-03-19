@@ -28,25 +28,32 @@
 
 %\input{parts/1.tex}
 
-
+\chapter{}
 \chapter{Lista 2.}
-\section{}
+\section{0pkt}
 \begin{framed}
 Przeczytaj notatkę o algorytmach zachłannych...
 \end{framed}
 %%%%%%%%%%%%%%%
-\section{}
+\section{1pkt}
 \begin{framed}
 Danych jest $n$ odcinków $I_j = <p_j,k_j>$, leżących na osi $OX$, $j = 1,\dots,n$. Uałóż algorytmznajdujący zbiór $S \subseteq \{ I_1,\dots,I_n \}$, nieprzecinających się odcinków, o największej mocy.
 \end{framed}
 
-Sortujemy odcinki rosnąco wg. $k_j$. Wybieramy pierwszy, potem kolejny, który się zmieści po pierwszym.\\
+Sortujemy odcinki rosnąco wg. końców $k_j$. Wybieramy pierwszy, gdyż najwcześniej się zakończy. Następnie pierwszy kolejny, który się zmieści po poprzednio wybranym.\\
 
-\noindent Dowód: Niech nasz algorytm daje uporządkowanie $U$. Załóżmy, że istnieje lepsze, optymalne uporządkowanie $S$. Weźmy pierwszą parę odcinków, które różnią się w obu tych uporzadkowaniach, tzn. $U_i \ne S_i$. Jeżeli odcinek $S_i$ kończy się wcześniej niż $U_i$ to zostałby on wybrany przez nasz algorytm. Jeśli kończy się na tej samej pozycji to nie ma znaczenia, który z nich został wybrany. Podobnie, indukcyjnie można zastosować to rozumowanie dla pozostałych par różnych odcinków w obu uporządkowaniach. Algorytm zachłanny daje więc rozwiązanie optymalne.
+\noindent Dowód: Niech nasz algorytm daje ciąg $S = \{s_1, s_2, \dots, s_n\}$. Załóżmy, że istnieje lepszy, optymalny ciąg $O = \{o_1,o_2, \dots, o_n\}$. 
+Weźmy pierwszą pozycję $i$, na której rozwiązania się różnią, czyli taką, że: $s_i \ne o_i$, oraz $j < i \Rightarrow u_j = o_j$. Rozważmy dwa przypadki:
+\begin{itemize}
+\item Jeśli kończy się na tej samej pozycji to nie ma znaczenia, który z nich został wybrany. Zatem rozwiązanie $\{o_1,\dots,o_i\}$ nie jest lepsze od $\{s_1,\dots,s_i\}$. (sprzeczność)
+\item Jeżeli odcinek $o_i$ kończy się wcześniej niż $u_i$ to zostałby on wybrany przez nasz algorytm zgodnie z lokalny, zachłannym kryterium. (sprzeczność)
+
+\end{itemize}
+Rozumowanie powtarzamy indukcyjnie dla kolejnych pozycji na których rozwiązania się różnią. Algorytm zachłanny daje więc rozwiązanie optymalne.
 
 
 %%%%%%%%%%%%%%%
-\section{}
+\section{1pkt}
 \begin{framed}
 Rozważ następującą wersję problemu wydawania reszty: dla danych liczb naturalnych$a, b$ $(a \leq b)$ chcemy przedstawić ułamek $\frac{a}{b}$ jako sumę różnych ułamków o licznikach równych$1$. Udowodnij, że algorytm zachłanny zawsze daje rozwiązanie. Czy zawsze jest to rozwiązanie optymalne (tj. o najmniejszej liczbie składników)?
 \end{framed}
@@ -68,7 +75,7 @@ Wytwarzanie ułamka egipskiego mniejszego od $\frac{x}{y}$ o najwiekszym mianown
 
 
 %%%%%%%%%%%%%%%
-\section{}
+\section{2pkt}
 \begin{framed}
 Udowodnij poprawność algorytmu Boruvki Solina.
 \end{framed}
@@ -107,7 +114,7 @@ Dodajmy krawędź $e_i$ do $E(T)$. W $T$ powstał cykl. Ponieważ $e_i$ jest naj
 
 
 %%%%%%%%%%%%%%%
-\section{}
+\section{2pkt}
 \begin{framed}
 Ułóż algorytm, który dla danego spójnego grafu $G$ oraz krawędzi $e$ sprawdza w czasie $O(n + m)$, czy krawędź $e$ należy do jakiegoś minimalnego drzewa spinającego grafu $G$. Możesz założyć, że wszystkie wagi krawędzi są różne.
 \end{framed}
