@@ -58,20 +58,32 @@ Rozumowanie powtarzamy indukcyjnie dla kolejnych pozycji na których rozwiązani
 Rozważ następującą wersję problemu wydawania reszty: dla danych liczb naturalnych$a, b$ $(a \leq b)$ chcemy przedstawić ułamek $\frac{a}{b}$ jako sumę różnych ułamków o licznikach równych$1$. Udowodnij, że algorytm zachłanny zawsze daje rozwiązanie. Czy zawsze jest to rozwiązanie optymalne (tj. o najmniejszej liczbie składników)?
 \end{framed}
 
-Wytwarzanie ułamka egipskiego mniejszego od $\frac{x}{y}$ o najwiekszym mianowniku: 
-\[\frac{x}{y} \rightarrow \frac{1}{\lceil \frac{y}{x} \rceil}\]
+Wytwarzanie ułamka egipskiego mniejszego od $\frac{x}{y}$ o najwiekszym mianowniku:
+%\[ \scalebox{2}{ 
 
-\noindent Licznik wyrażenia $\frac{x}{y} - \frac{1}{\lceil \frac{y}{x} \rceil} = \frac{x \lceil \frac{y}{x} \rceil - y}{x\lceil \frac{y}{x} \rceil}$ będzie malał, lecz zawsze będzie $\ge 0$:\\
+$$\frac{a}{b} \rightarrow \frac{1}{\left\lceil \frac{b}{a} \right\rceil} + R$$
+$$
+ R =\frac{a}{b} - \frac{1}{\left\lceil \frac{b}{a} \right\rceil} = \frac{a \left\lceil b / a \right\rceil -b }{b\left\lceil \frac{b}{a} \right\rceil} = 
+$$
 
-\noindent Sprawdźmy, czy faktycznie $ 0 \leq x \lceil \frac{y}{x} \rceil - y < x$
+(wiemy, że $\lceil x \rceil = - \lfloor - x \rfloor$)
 
-\[x \lceil \frac{y}{x} \rceil - y < x \Leftrightarrow x \lceil \frac{y}{x} \rceil - x < y \Leftrightarrow \lceil \frac{y}{x} \rceil - 1 < \frac{y}{x} \textrm{.}\]
+$$ = \frac{-b  - a \left\lfloor -b / a \right\rfloor }{b\left\lceil \frac{b}{a} \right\rceil} = $$
 
-\noindent Co jest oczywiście prawdą. Dodatkowo: $x \lceil \frac{y}{x} \rceil - y \ge 0$. Więc ułamek zawsze się zmiejsza, i zatrzyma się na $0$.
+(definicja modulo)
 
-\noindent Kontrprzykład na optymalność. Nasz da jakieś gówno, optymalny da:
+$$ = \frac{(-b)\mod a }{b\left\lceil \frac{b}{a} \right\rceil}$$
+%} \]
 
-\[\frac{5}{121}=\frac{1}{33}+\frac{1}{121}+\frac{1}{363}\]
+Licznik wyrażenia jest zawsze $a > x \geq 0$, zatem z każdym krokiem maleje i rekursja zakończy się na zerze.
+
+
+\noindent Kontrprzykład na optymalność::
+$$\frac{5}{121}=\frac{1}{33}+\frac{1}{121}+\frac{1}{363} $$
+vs
+$$\frac{5}{121}= \frac{1}{25} + \frac{1}{757} + \frac{1}{763309} + \frac{1}{873960180913} + \dots $$
+
+
 
 
 %%%%%%%%%%%%%%%
